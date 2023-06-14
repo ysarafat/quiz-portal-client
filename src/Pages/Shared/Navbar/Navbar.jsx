@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HiBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 import { Link, NavLink } from 'react-router-dom';
+import Container from '../../../components/Container';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +12,7 @@ function Navbar() {
                 to="/"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
-                    isActive
-                        ? 'text-primaryColor'
-                        : 'text-primaryColor-text hover:text-primaryColor duration-300'
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Home</li>
@@ -22,9 +21,7 @@ function Navbar() {
                 to="/toys"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
-                    isActive
-                        ? 'text-primaryColor'
-                        : 'text-primaryColor-text hover:text-primaryColor duration-300'
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Quiz</li>
@@ -33,9 +30,7 @@ function Navbar() {
                 to="/blog"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
-                    isActive
-                        ? 'text-primaryColor'
-                        : 'text-primaryColor-text hover:text-primaryColor duration-300'
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Blog</li>
@@ -44,9 +39,7 @@ function Navbar() {
                 to="/login"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
-                    isActive
-                        ? 'text-primaryColor'
-                        : 'text-primaryColor-text hover:text-primaryColor duration-300'
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Login</li>
@@ -55,34 +48,35 @@ function Navbar() {
                 to="/register"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
-                    isActive ? 'text-primary' : 'text-primary-text hover:text-primary duration-300'
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Register</li>
             </NavLink>
-            <Link
-                onClick={() => setIsOpen(!isOpen)}
-                className="text-primary-text hover:text-primary duration-300"
-            >
+            <li className=" hover:text-primaryColor duration-300">
                 <button>logout</button>
-            </Link>
+            </li>
         </>
     );
 
     return (
         <div className="sticky top-0 z-40 border-b lg:py-4 py-2 bg-white ">
-            <div className="container mx-auto  hidden lg:flex justify-between items-center px-4">
-                <Link to="/">
-                    <div className="flex items-center gap-3">
-                        <h1 className="text-2xl font-bold text-primary-text ">
-                            QUIZ <span className="text-primaryColor">PORTAL</span>
-                        </h1>
+            <Container>
+                <div className="container mx-auto  hidden lg:flex justify-between items-center px-4">
+                    <Link to="/">
+                        <div className="flex items-center gap-3">
+                            <h1 className="text-2xl font-bold text-primary-text ">
+                                QUIZ <span className="text-primaryColor">PORTAL</span>
+                            </h1>
+                        </div>
+                    </Link>
+                    <div>
+                        <ul className="flex items-center text-base font-medium gap-5">
+                            {navLinks}
+                        </ul>
                     </div>
-                </Link>
-                <div>
-                    <ul className="flex items-center text-base font-medium gap-5">{navLinks}</ul>
                 </div>
-            </div>
+            </Container>
             <div className="lg:hidden z-40 bg-white  py-2 px-4 flex justify-between items-center">
                 <div>
                     <Link to="/">

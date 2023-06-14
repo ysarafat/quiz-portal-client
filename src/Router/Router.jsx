@@ -3,12 +3,18 @@ import Dashboard from '../Layout/Dashboard';
 import Main from '../Layout/Main';
 import AddQuiz from '../Pages/Admin/AddQuiz/AddQuiz';
 import AddQuizCategory from '../Pages/Admin/AddQuizCategory/AddQuizCategory';
+import Register from '../Pages/Register/Register';
 
 const router = new createBrowserRouter([
     {
         path: '/',
         element: <Main />,
-        children: [],
+        children: [
+            {
+                path: '/register',
+                element: <Register />,
+            },
+        ],
     },
     {
         path: 'dashboard',
