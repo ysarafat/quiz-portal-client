@@ -4,9 +4,11 @@ import {
     getAuth,
     onAuthStateChanged,
     signInWithEmailAndPassword,
+    signOut,
     updateProfile,
 } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import app from '../Firebase/Firebase.config';
 
 const auth = getAuth(app);
@@ -39,6 +41,19 @@ function AuthProviders({ children }) {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
+    // logout user
+    const logoutUser = () => {
+        setLoading(true);
+        signOut(auth).then(() => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Logout Successful',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        });
+    };
 
     // user observer
     useEffect(() => {
@@ -55,6 +70,7 @@ function AuthProviders({ children }) {
         createUser,
         updateUser,
         loginUser,
+        logoutUser,
         loading,
         user,
     };

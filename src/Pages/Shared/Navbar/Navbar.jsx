@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { HiBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 import { Link, NavLink } from 'react-router-dom';
+import emptyUser from '../../../assets/blank-profile.webp';
 import Container from '../../../components/Container';
+import useAuth from '../../../hooks/useAuth';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { logoutUser, user } = useAuth();
 
     const navLinks = (
         <>
@@ -35,27 +38,33 @@ function Navbar() {
             >
                 <li>Blog</li>
             </NavLink>{' '}
-            <NavLink
-                to="/login"
-                onClick={() => setIsOpen(!isOpen)}
-                className={({ isActive }) =>
-                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
-                }
-            >
-                <li>Login</li>
-            </NavLink>
-            <NavLink
-                to="/register"
-                onClick={() => setIsOpen(!isOpen)}
-                className={({ isActive }) =>
-                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
-                }
-            >
-                <li>Register</li>
-            </NavLink>
-            <li className=" hover:text-primaryColor duration-300">
-                <button>logout</button>
-            </li>
+            {!user && (
+                <>
+                    <NavLink
+                        to="/login"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={({ isActive }) =>
+                            isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
+                        }
+                    >
+                        <li>Login</li>
+                    </NavLink>
+                    <NavLink
+                        to="/register"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={({ isActive }) =>
+                            isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
+                        }
+                    >
+                        <li>Register</li>
+                    </NavLink>
+                </>
+            )}
+            {user && (
+                <button onClick={logoutUser} className=" hover:text-primaryColor duration-300">
+                    <button>logout</button>
+                </button>
+            )}
         </>
     );
 
@@ -70,10 +79,17 @@ function Navbar() {
                             </h1>
                         </div>
                     </Link>
-                    <div>
+                    <div className="flex gap-5 items-center">
                         <ul className="flex items-center text-base font-medium gap-5">
                             {navLinks}
                         </ul>
+                        {user && (
+                            <img
+                                className="w-10 h-10 rounded-full border-2 border-primaryColor"
+                                src={user?.photoURL || emptyUser}
+                                alt=""
+                            />
+                        )}
                     </div>
                 </div>
             </Container>
