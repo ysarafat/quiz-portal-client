@@ -3,10 +3,10 @@ import {
     createUserWithEmailAndPassword,
     getAuth,
     onAuthStateChanged,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    updateProfile,
 } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
-
 import app from '../Firebase/Firebase.config';
 
 const auth = getAuth(app);
@@ -20,8 +20,21 @@ function AuthProviders({ children }) {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
+    // update user Profile
+    const updateUser = (name, image) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: image,
+        })
+            .then(() => {
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     // login user
-
     const loginUser = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
@@ -40,6 +53,7 @@ function AuthProviders({ children }) {
 
     const authInfo = {
         createUser,
+        updateUser,
         loginUser,
         loading,
         user,

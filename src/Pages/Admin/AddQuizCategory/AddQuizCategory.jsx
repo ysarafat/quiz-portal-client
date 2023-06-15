@@ -12,8 +12,8 @@ function AddQuizCategory() {
 
         formData.append('file', image[0]);
         formData.append('upload_preset', 'quizPortal');
-        formData.append('cloud_name', 'dg5l0clha');
-        fetch('https://api.cloudinary.com/v1_1/dg5l0clha/image/upload', {
+        formData.append('cloud_name', `${import.meta.env.VITE_CLOUD_NAME}`);
+        fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, {
             method: 'POST',
             body: formData,
         })
