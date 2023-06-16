@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Container from '../../../components/Container';
 
 function Leaderboard() {
     const [userScore, setUserScore] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/score')
+        fetch('https://quiz-portal.onrender.com/score')
             .then((res) => res.json())
             .then((data) => setUserScore(data));
     }, []);
     console.log(userScore);
     return (
-        <Container>
+        <>
             <div>
                 <h1 className="lg:text-5xl text-3xl font-title font-bold text-center">
                     Leaderboard
@@ -51,7 +50,7 @@ function Leaderboard() {
                     </tbody>
                 </table>
             </div>
-        </Container>
+        </>
     );
 }
 

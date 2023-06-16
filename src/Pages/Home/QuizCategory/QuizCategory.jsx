@@ -5,10 +5,9 @@ import QuizCategoryCard from './QuizCategoryCard';
 
 function QuizCategory() {
     const [category] = useCategory();
-    console.log(category);
     return (
         <Container>
-            <div className="my-16">
+            <div className="py-10">
                 <div>
                     <h1 className="text-center text-4xl font-bold font-title">Quiz Category</h1>
                 </div>

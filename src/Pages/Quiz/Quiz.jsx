@@ -7,7 +7,7 @@ function Quiz() {
     const { category } = useParams();
     const [quizData, setQuizData] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/quiz?name=${category}`)
+        fetch(`https://quiz-portal.onrender.com/quiz?name=${category}`)
             .then((res) => res.json())
             .then((data) => setQuizData(data));
     }, [category]);

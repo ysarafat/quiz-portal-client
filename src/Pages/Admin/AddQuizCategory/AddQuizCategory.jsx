@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import Swal from 'sweetalert2';
 
 function AddQuizCategory() {
     const handleQuizCategory = (event) => {
@@ -20,7 +21,7 @@ function AddQuizCategory() {
             .then((res) => res.json())
             .then((image) => {
                 const category = { name, image: image.url, description };
-                fetch('http://localhost:5000/add-category', {
+                fetch('https://quiz-portal.onrender.com/add-category', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -28,7 +29,17 @@ function AddQuizCategory() {
                     body: JSON.stringify(category),
                 })
                     .then((res) => res.json())
-                    .then((data) => console.log(data));
+                    .then((data) => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Successful Add Quiz Category',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        }
+                    });
             });
     };
     return (

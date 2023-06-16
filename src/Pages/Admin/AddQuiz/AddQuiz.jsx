@@ -32,7 +32,7 @@ function AddQuiz() {
         const quizCategory = form.category.value;
         const quizAnswer = form.answer.value;
         const quizInfo = { quizQuestion, quizCategory, quizOption, quizAnswer };
-        fetch('http://localhost:5000/add-quiz', {
+        fetch('https://quiz-portal.onrender.com/add-quiz', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -45,7 +45,7 @@ function AddQuiz() {
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
-                        title: 'Registration Successful',
+                        title: 'Question Add Successful',
                         showConfirmButton: false,
                         timer: 1500,
                     });

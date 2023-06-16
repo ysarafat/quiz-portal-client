@@ -33,7 +33,7 @@ function Navbar() {
             </NavLink>
             {user && isAdmin ? (
                 <NavLink
-                    to="/dashboard"
+                    to="/dashboard/leaderboard"
                     onClick={() => setIsOpen(!isOpen)}
                     className={({ isActive }) =>
                         isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'

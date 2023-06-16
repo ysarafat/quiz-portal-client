@@ -6,7 +6,7 @@ const useIsAdmin = () => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     const { user } = useAuth();
     useEffect(() => {
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://quiz-portal.onrender.com/user?email=${user?.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setIsAdmin(data.role === 'admin');

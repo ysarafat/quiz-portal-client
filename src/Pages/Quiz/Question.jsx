@@ -30,7 +30,7 @@ function Question({ quizData, quizName }) {
                 score,
                 quizName,
             };
-            fetch('http://localhost:5000/quiz-score', {
+            fetch('https://quiz-portal.onrender.com/quiz-score', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
