@@ -14,7 +14,7 @@ function Dashboard() {
                                 </Link>
                             </li>
                             <li>
-                                <Link className="text-lg text-textDark " to="/">
+                                <Link className="text-lg text-textDark " to="add-quiz">
                                     Add Quiz
                                 </Link>
                             </li>
@@ -22,7 +22,7 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="lg:col-span-6 col-span-7 p-5 overflow-x-hidden">
-                    <div>
+                    <div className="w-3/4 mx-auto">
                         <Outlet />
                     </div>
                 </div>

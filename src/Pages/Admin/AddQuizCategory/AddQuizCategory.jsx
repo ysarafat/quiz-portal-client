@@ -41,7 +41,7 @@ function AddQuizCategory() {
             <form onSubmit={handleQuizCategory} action="">
                 <div className=" space-y-2">
                     <div className="w-full">
-                        <label className="text-lg text-textDark">Quiz category</label>
+                        <label className="text-lg text-textDark">Quiz Name</label>
                         <input
                             type="text"
                             className="h-11 w-full border border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
@@ -50,7 +50,7 @@ function AddQuizCategory() {
                         />
                     </div>
                     <div className="w-full ">
-                        <label className="text-lg text-textDark ">Category Banner</label>
+                        <label className="text-lg text-textDark ">Quiz Banner</label>
                         <input
                             type="file"
                             className="h-11 w-full border  border-slate-200 outline-primaryColor rounded-lg text-textDark file:bg-primaryColor file:border-none file:h-11 "
@@ -58,21 +58,21 @@ function AddQuizCategory() {
                         />
                     </div>
                     <div>
-                        <label className="text-lg text-textDark ">category Description</label>
+                        <label className="text-lg text-textDark ">Quiz Description</label>
                         <textarea
                             name="description"
                             id=""
                             cols="30"
                             rows="10"
                             className=" w-full border border-slate-200 outline-primaryColor rounded-lg p-3 text-textDark"
-                            placeholder="category Description Here"
+                            placeholder="Description Here"
                         />
                     </div>
                 </div>
                 <input
                     className="h-11 bg-primaryColor hover:bg-hoverColor mt-4 w-full text-lg text-textDark font-title rounded-lg "
                     type="submit"
-                    value="Add Category"
+                    value="Add Quiz"
                 />
             </form>
         </div>

@@ -3,7 +3,9 @@ import Dashboard from '../Layout/Dashboard';
 import Main from '../Layout/Main';
 import AddQuiz from '../Pages/Admin/AddQuiz/AddQuiz';
 import AddQuizCategory from '../Pages/Admin/AddQuizCategory/AddQuizCategory';
+import Home from '../Pages/Home/Home/Home';
 import Login from '../Pages/Login/Login';
+import Quiz from '../Pages/Quiz/Quiz';
 import Register from '../Pages/Register/Register';
 
 const router = new createBrowserRouter([
@@ -12,12 +14,20 @@ const router = new createBrowserRouter([
         element: <Main />,
         children: [
             {
+                path: '/',
+                element: <Home />,
+            },
+            {
                 path: '/register',
                 element: <Register />,
             },
             {
                 path: '/login',
                 element: <Login />,
+            },
+            {
+                path: '/quiz/:category',
+                element: <Quiz />,
             },
         ],
     },
@@ -32,10 +42,6 @@ const router = new createBrowserRouter([
             {
                 path: 'quiz-category',
                 element: <AddQuizCategory />,
-            },
-            {
-                path: 'add-quiz',
-                element: <AddQuiz />,
             },
         ],
     },

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import useCategory from '../../../hooks/useCategory';
 
 function AddQuiz() {
@@ -27,10 +28,10 @@ function AddQuiz() {
     const handleAddQuiz = (event) => {
         event.preventDefault();
         const form = event.target;
-        const quizName = form.name.value;
+        const quizQuestion = form.name.value;
         const quizCategory = form.category.value;
         const quizAnswer = form.answer.value;
-        const quizInfo = { quizName, quizCategory, quizOption, quizAnswer };
+        const quizInfo = { quizQuestion, quizCategory, quizOption, quizAnswer };
         fetch('http://localhost:5000/add-quiz', {
             method: 'POST',
             headers: {
@@ -39,7 +40,18 @@ function AddQuiz() {
             body: JSON.stringify(quizInfo),
         })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Registration Successful',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    form.reset();
+                }
+            });
     };
     return (
         <div>
@@ -54,11 +66,11 @@ function AddQuiz() {
                 >
                     <div className="lg:flex  space-y-3 items-center gap-6">
                         <div className="w-full">
-                            <label className="text-lg text-textDark">Quiz Name</label>
+                            <label className="text-lg text-textDark">Quiz Question</label>
                             <input
                                 type="text"
                                 className="h-11 w-full border mt-2 border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
-                                placeholder="Enter Quiz Name"
+                                placeholder="Enter Quiz Question"
                                 name="name"
                             />
                         </div>

@@ -21,13 +21,22 @@ function Navbar() {
                 <li>Home</li>
             </NavLink>
             <NavLink
-                to="/toys"
+                to="/quiz"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
                     isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
                 <li>Quiz</li>
+            </NavLink>
+            <NavLink
+                to="/dashboard"
+                onClick={() => setIsOpen(!isOpen)}
+                className={({ isActive }) =>
+                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
+                }
+            >
+                <li>dashboard</li>
             </NavLink>
             <NavLink
                 to="/blog"

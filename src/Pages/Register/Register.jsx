@@ -36,17 +36,33 @@ function Register() {
         })
             .then((res) => res.json())
             .then((image) => {
-                console.log(image.url);
+                const user = {
+                    name,
+                    email,
+                    photo: image.url,
+                    role: 'user',
+                };
                 createUser(email, password)
                     .then(() => {
                         updateUser(name, image.url);
-                        Swal.fire({
-                            position: 'top-center',
-                            icon: 'success',
-                            title: 'Registration Successful',
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
+                        fetch('http://localhost:5000/user', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json',
+                            },
+                            body: JSON.stringify(user),
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Registration Successful',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            });
                     })
                     .catch((err) => setError(err.message));
             });
