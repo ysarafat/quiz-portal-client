@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import image from '../../assets/Login-rafiki.svg';
 import Container from '../../components/Container';
@@ -7,6 +8,9 @@ import useAuth from '../../hooks/useAuth';
 function Login() {
     const { loginUser } = useAuth();
     const [error, setError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
     const handelLoginForm = (event) => {
         setError('');
         event.preventDefault();
@@ -15,6 +19,7 @@ function Login() {
         const password = form.password.value;
         loginUser(email, password)
             .then(() => {
+                navigate(from, { replace: true });
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',

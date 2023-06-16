@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function QuizCategoryCard({ categoryItem }) {
     const { name, image, description } = categoryItem;
+
     return (
         <div className="bg-slate-200  rounded-lg border border-slate-300 grid grid-rows-[auto,1fr,auto]">
             <img className="w-full h-[280px] rounded-t-lg" src={image} alt="" />

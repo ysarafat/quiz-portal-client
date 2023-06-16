@@ -4,11 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 import emptyUser from '../../../assets/blank-profile.webp';
 import Container from '../../../components/Container';
 import useAuth from '../../../hooks/useAuth';
+import useIsAdmin from '../../../hooks/useIsAdmin';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { logoutUser, user } = useAuth();
-
+    const [isAdmin] = useIsAdmin();
+    console.log(isAdmin);
     const navLinks = (
         <>
             <NavLink
@@ -21,32 +23,28 @@ function Navbar() {
                 <li>Home</li>
             </NavLink>
             <NavLink
-                to="/quiz"
+                to="/quiz-score"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
                     isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
                 }
             >
-                <li>Quiz</li>
+                <li>My Score</li>
             </NavLink>
-            <NavLink
-                to="/dashboard"
-                onClick={() => setIsOpen(!isOpen)}
-                className={({ isActive }) =>
-                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
-                }
-            >
-                <li>dashboard</li>
-            </NavLink>
-            <NavLink
-                to="/blog"
-                onClick={() => setIsOpen(!isOpen)}
-                className={({ isActive }) =>
-                    isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
-                }
-            >
-                <li>Blog</li>
-            </NavLink>{' '}
+            {user && isAdmin ? (
+                <NavLink
+                    to="/dashboard"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={({ isActive }) =>
+                        isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'
+                    }
+                >
+                    <li>Admin Dashboard</li>
+                </NavLink>
+            ) : (
+                ''
+            )}
+
             {!user && (
                 <>
                     <NavLink

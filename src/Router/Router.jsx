@@ -3,10 +3,13 @@ import Dashboard from '../Layout/Dashboard';
 import Main from '../Layout/Main';
 import AddQuiz from '../Pages/Admin/AddQuiz/AddQuiz';
 import AddQuizCategory from '../Pages/Admin/AddQuizCategory/AddQuizCategory';
+import Leaderboard from '../Pages/Admin/Leaderboard/Leaderboard';
 import Home from '../Pages/Home/Home/Home';
 import Login from '../Pages/Login/Login';
 import Quiz from '../Pages/Quiz/Quiz';
 import Register from '../Pages/Register/Register';
+import AdminRoute from './AdminRoute';
+import PrivateRoute from './PrivateRoute';
 
 const router = new createBrowserRouter([
     {
@@ -27,21 +30,45 @@ const router = new createBrowserRouter([
             },
             {
                 path: '/quiz/:category',
-                element: <Quiz />,
+                element: (
+                    <PrivateRoute>
+                        <Quiz />
+                    </PrivateRoute>
+                ),
             },
         ],
     },
     {
         path: 'dashboard',
-        element: <Dashboard />,
+        element: (
+            <AdminRoute>
+                <Dashboard />
+            </AdminRoute>
+        ),
         children: [
             {
+                path: 'leaderboard',
+                element: (
+                    <AdminRoute>
+                        <Leaderboard />
+                    </AdminRoute>
+                ),
+            },
+            {
                 path: 'add-quiz',
-                element: <AddQuiz />,
+                element: (
+                    <AdminRoute>
+                        <AddQuiz />
+                    </AdminRoute>
+                ),
             },
             {
                 path: 'quiz-category',
-                element: <AddQuizCategory />,
+                element: (
+                    <AdminRoute>
+                        <AddQuizCategory />
+                    </AdminRoute>
+                ),
             },
         ],
     },
