@@ -23,7 +23,7 @@ function Navbar() {
                 <li>Home</li>
             </NavLink>
             <NavLink
-                to="/quiz-score"
+                to="/my-score"
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
                     isActive ? 'text-primaryColor' : ' hover:text-primaryColor duration-300'

@@ -6,6 +6,7 @@ import AddQuizCategory from '../Pages/Admin/AddQuizCategory/AddQuizCategory';
 import Leaderboard from '../Pages/Admin/Leaderboard/Leaderboard';
 import Home from '../Pages/Home/Home/Home';
 import Login from '../Pages/Login/Login';
+import MyScore from '../Pages/MyScore/MyScore';
 import Quiz from '../Pages/Quiz/Quiz';
 import Register from '../Pages/Register/Register';
 import AdminRoute from './AdminRoute';
@@ -33,6 +34,14 @@ const router = new createBrowserRouter([
                 element: (
                     <PrivateRoute>
                         <Quiz />
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: 'my-score',
+                element: (
+                    <PrivateRoute>
+                        <MyScore />
                     </PrivateRoute>
                 ),
             },

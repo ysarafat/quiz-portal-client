@@ -26,6 +26,11 @@ function Dashboard() {
                                     Add Quiz Questions
                                 </Link>
                             </li>
+                            <li>
+                                <Link className="text-lg text-textDark " to="/">
+                                    Back To Home
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import image from '../../assets/Login-rafiki.svg';
 import Container from '../../components/Container';
 import useAuth from '../../hooks/useAuth';
 
 function Register() {
-    const { createUser, updateUser, user } = useAuth();
-    console.log(user);
+    const { createUser, updateUser } = useAuth();
     const [error, setError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
     const handelRegisterForm = (e) => {
         setError('');
         e.preventDefault();
@@ -54,14 +57,16 @@ function Register() {
                         })
                             .then((res) => res.json())
                             .then((data) => {
-                                console.log(data);
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Registration Successful',
-                                    showConfirmButton: false,
-                                    timer: 1500,
-                                });
+                                navigate(from, { replace: true });
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Registration Successful',
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                    });
+                                }
                             });
                     })
                     .catch((err) => setError(err.message));

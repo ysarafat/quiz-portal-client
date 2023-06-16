@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Container from '../../../components/Container';
+import Container from '../../components/Container';
+import useAuth from '../../hooks/useAuth';
 
-function Leaderboard() {
-    const [userScore, setUserScore] = useState([]);
+function MyScore() {
+    const { user } = useAuth();
+    const [myScore, setMyScore] = useState();
     useEffect(() => {
-        fetch('http://localhost:5000/score')
+        fetch(`http://localhost:5000/my-score?email=${user?.email}`)
             .then((res) => res.json())
-            .then((data) => setUserScore(data));
-    }, []);
-    console.log(userScore);
+            .then((data) => setMyScore(data));
+    }, [user]);
     return (
         <Container>
             <div>
-                <h1 className="lg:text-5xl text-3xl font-title font-bold text-center">
-                    Leaderboard
-                </h1>
+                <h1 className="lg:text-5xl text-3xl font-title font-bold text-center">My Score</h1>
             </div>
             <div className="relative overflow-x-auto mt-8">
                 <table className="w-full text-base text-left text-gray-500 dark:text-gray-400">
@@ -35,7 +34,7 @@ function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {userScore?.map((score) => (
+                        {myScore?.map((score) => (
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th
                                     scope="row"
@@ -55,4 +54,4 @@ function Leaderboard() {
     );
 }
 
-export default Leaderboard;
+export default MyScore;
