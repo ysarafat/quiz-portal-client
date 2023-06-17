@@ -42,7 +42,7 @@ function Question({ quizData, quizName }) {
 
     console.log(score);
     return (
-        <div className="bg-slate-200 w-1/2 mx-auto my-16 p-8">
+        <div className="bg-slate-100 w-1/2 mx-auto my-16 p-8 rounded-lg">
             {showScore ? (
                 <Score quizScore={score} numberOfQus={quizData.length} />
             ) : (
@@ -55,7 +55,7 @@ function Question({ quizData, quizName }) {
                             <button
                                 key={index}
                                 onClick={() => setSelectedOption(index)}
-                                className={`bg-white hover:bg-primaryColor duration-300 w-full py-2 px-5 ${
+                                className={`border border-slate-400 hover:bg-primaryColor duration-300 w-full py-2 px-5 ${
                                     selectedOption === index ? 'bg-hoverColor' : ''
                                 }`}
                             >

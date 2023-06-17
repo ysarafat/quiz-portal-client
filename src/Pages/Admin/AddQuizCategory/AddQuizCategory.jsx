@@ -45,7 +45,7 @@ function AddQuizCategory() {
     return (
         <div>
             <div>
-                <h1 className="lg:text-5xl text-3xl font-title font-bold text-center">
+                <h1 className="lg:text-4xl text-3xl mb-10 font-title font-bold text-center">
                     Add Quiz Category
                 </h1>
             </div>

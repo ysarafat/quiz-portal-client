@@ -56,14 +56,10 @@ function AddQuiz() {
     return (
         <div>
             <div>
-                <h1 className="lg:text-5xl text-3xl font-title font-bold text-center">Add Quiz</h1>
+                <h1 className="lg:text-4xl text-3xl font-title font-bold text-center">Add Quiz</h1>
             </div>
             <div>
-                <form
-                    onSubmit={handleAddQuiz}
-                    className="mt-10 bg-slate-200 p-5 lg:p-10 rounded-lg"
-                    action=""
-                >
+                <form onSubmit={handleAddQuiz} className="mt-10  rounded-lg" action="">
                     <div className="lg:flex  space-y-3 items-center gap-6">
                         <div className="w-full">
                             <label className="text-lg text-textDark">Quiz Question</label>
