@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import image from '../../assets/Login-rafiki.svg';
 import Container from '../../components/Container';
@@ -8,10 +8,13 @@ import useAuth from '../../hooks/useAuth';
 function Register() {
     const { createUser, updateUser } = useAuth();
     const [error, setError] = useState('');
+    const [showPass, setShowPass] = useState(false);
+    const [loading, setLoading] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
     const handelRegisterForm = (e) => {
+        setLoading(true);
         setError('');
         e.preventDefault();
         // setError('');
@@ -23,6 +26,7 @@ function Register() {
         const confirmPassword = form.confirmPassword.value;
         console.log(name, photo, email, password, confirmPassword);
         if (password !== confirmPassword) {
+            setLoading(false);
             return setError('Your password did not match');
         }
         // password validation
@@ -66,10 +70,14 @@ function Register() {
                                         showConfirmButton: false,
                                         timer: 1500,
                                     });
+                                    setLoading(false);
                                 }
                             });
                     })
-                    .catch((err) => setError(err.message));
+                    .catch((err) => {
+                        setError(err.message);
+                        setLoading(false);
+                    });
             });
     };
     return (
@@ -81,7 +89,7 @@ function Register() {
                 <div className="w-full">
                     <form
                         onSubmit={handelRegisterForm}
-                        className="space-y-3 bg-slate-200 p-5 rounded-lg"
+                        className="space-y-3 bg-slate-100 p-5 rounded-lg"
                     >
                         <h1 className="text-3xl font-title font-bold text-center mb-7">
                             Register User
@@ -123,7 +131,7 @@ function Register() {
                         <div className="w-full">
                             <label className="text-lg text-textDark">Password</label>
                             <input
-                                type="password"
+                                type={showPass ? 'text' : 'password'}
                                 className="h-11 w-full border mt-2 border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
                                 placeholder="Enter Your Password"
                                 name="password"
@@ -133,18 +141,37 @@ function Register() {
                         <div className="w-full ">
                             <label className="text-lg text-textDark">Confirm Password</label>
                             <input
-                                type="password"
+                                type={showPass ? 'text' : 'password'}
                                 className="h-11 w-full border mt-2 border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
                                 placeholder="Enter Confirm Password"
                                 name="confirmPassword"
                                 required
                             />
                         </div>
+                        <div className="flex items-center mt-2">
+                            <input
+                                onClick={() => setShowPass(!showPass)}
+                                type="checkbox"
+                                name="check"
+                                className="checkbox "
+                            />
+
+                            <label className="ml-2  font-medium text-gray-900 dark:text-gray-300">
+                                {showPass ? 'Hide Password' : 'Show Password'}{' '}
+                            </label>
+                        </div>
                         <input
-                            className="h-11 bg-primaryColor hover:bg-hoverColor  w-full text-lg text-textDark font-title rounded-lg "
+                            className="h-11 bg-primaryColor hover:bg-hoverColor disabled:bg-slate-300 w-full text-lg text-textDark font-title rounded-lg "
+                            disabled={loading}
                             type="submit"
-                            value="Register"
+                            value={loading ? 'Please Wait' : 'Register'}
                         />
+                        <p className="mt-6 dark:text-white">
+                            Already have an account?
+                            <Link className="text-primaryColor underline ms-2" to="/login">
+                                Login
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>

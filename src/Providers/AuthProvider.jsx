@@ -3,6 +3,7 @@ import {
     createUserWithEmailAndPassword,
     getAuth,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signOut,
     updateProfile,
@@ -54,7 +55,11 @@ function AuthProviders({ children }) {
             });
         });
     };
-
+    // reset password
+    const resetPassword = (email) => {
+        setLoading(true);
+        return sendPasswordResetEmail(auth, email);
+    };
     // user observer
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
@@ -71,6 +76,7 @@ function AuthProviders({ children }) {
         updateUser,
         loginUser,
         logoutUser,
+        resetPassword,
         loading,
         user,
     };
