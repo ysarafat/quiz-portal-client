@@ -5,11 +5,11 @@ import useCategory from '../../../hooks/useCategory';
 
 function AddQuiz() {
     const [category] = useCategory();
-
     const [option1, setOption1] = useState('');
     const [option2, setOption2] = useState('');
     const [option3, setOption3] = useState('');
     const [option4, setOption4] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleOption1 = (event) => {
         setOption1(event.target.value);
@@ -27,6 +27,7 @@ function AddQuiz() {
 
     const handleAddQuiz = (event) => {
         event.preventDefault();
+        setLoading(true);
         const form = event.target;
         const quizQuestion = form.name.value;
         const quizCategory = form.category.value;
@@ -50,6 +51,7 @@ function AddQuiz() {
                         timer: 1500,
                     });
                     form.reset();
+                    setLoading(false);
                 }
             });
     };
@@ -68,6 +70,7 @@ function AddQuiz() {
                                 className="h-11 w-full border mt-2 border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
                                 placeholder="Enter Quiz Question"
                                 name="name"
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -99,6 +102,7 @@ function AddQuiz() {
                                 placeholder="Enter Quiz Option"
                                 name="option1"
                                 onChange={handleOption1}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -109,6 +113,7 @@ function AddQuiz() {
                                 placeholder="Enter Quiz Option"
                                 name="option2"
                                 onChange={handleOption2}
+                                required
                             />
                         </div>
                     </div>
@@ -121,6 +126,7 @@ function AddQuiz() {
                                 placeholder="Enter Quiz Option"
                                 name="option3"
                                 onChange={handleOption3}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -131,6 +137,7 @@ function AddQuiz() {
                                 placeholder="Enter Quiz Option"
                                 name="option4"
                                 onChange={handleOption4}
+                                required
                             />
                         </div>
                     </div>
@@ -153,9 +160,10 @@ function AddQuiz() {
                         </select>
                     </div>
                     <input
-                        className="h-11 bg-primaryColor hover:bg-hoverColor mt-4 w-full text-lg text-textDark font-title rounded-lg "
+                        className="h-11 bg-primaryColor hover:bg-hoverColor disabled:bg-slate-300 mt-4 w-full text-lg text-textDark font-title rounded-lg "
+                        disabled={loading}
                         type="submit"
-                        value="Add Quiz"
+                        value={loading ? 'Please Wait' : 'Add Question'}
                     />
                 </form>
             </div>

@@ -5,7 +5,7 @@ function QuizCategoryCard({ categoryItem }) {
     const { name, image, description } = categoryItem;
 
     return (
-        <div className="bg-slate-200  rounded-lg border border-slate-300 grid grid-rows-[auto,1fr,auto]">
+        <div className="bg-slate-100  rounded-lg border border-slate-200 grid grid-rows-[auto,1fr,auto]">
             <img className="w-full h-[280px] rounded-t-lg" src={image} alt="" />
             <div className="px-5 my-3 flex-grow">
                 <h1 className="mb-2 text-xl font-title font-bold">{name}</h1>

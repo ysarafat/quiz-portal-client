@@ -11,7 +11,7 @@ function Quiz() {
             .then((res) => res.json())
             .then((data) => setQuizData(data));
     }, [category]);
-    console.log(quizData);
+
     return (
         <Container>
             <div className="my-16">

@@ -8,14 +8,14 @@ function Question({ quizData, quizName }) {
     const [score, setScore] = useState(0);
     const [selectedOption, setSelectedOption] = useState();
     const [showScore, setShowScore] = useState(false);
-    const handleScore = () => {
-        if (
-            quizData[currentQuestionIndex].quizOption[selectedOption] ===
-            quizData[currentQuestionIndex].quizAnswer
-        ) {
-            setScore(score + 1);
-        }
+    const quizScore = {
+        name: user?.displayName,
+        email: user?.email,
+        photo: user?.photoUrl,
+        score: score + 1,
+        quizName,
     };
+
     const handleOptionChange = () => {
         handleScore();
         if (currentQuestionIndex < quizData.length - 1) {
@@ -23,13 +23,6 @@ function Question({ quizData, quizName }) {
             setSelectedOption();
         } else {
             setShowScore(true);
-            const quizScore = {
-                name: user?.displayName,
-                email: user?.email,
-                photo: user?.photoUrl,
-                score,
-                quizName,
-            };
             fetch('https://quiz-portal.onrender.com/quiz-score', {
                 method: 'POST',
                 headers: {
@@ -39,8 +32,15 @@ function Question({ quizData, quizName }) {
             });
         }
     };
+    const handleScore = () => {
+        if (
+            quizData[currentQuestionIndex].quizOption[selectedOption] ===
+            quizData[currentQuestionIndex].quizAnswer
+        ) {
+            setScore(score + 1);
+        }
+    };
 
-    console.log(score);
     return (
         <div className="bg-slate-100 w-1/2 mx-auto my-16 p-8 rounded-lg">
             {showScore ? (

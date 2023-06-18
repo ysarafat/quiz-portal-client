@@ -34,9 +34,11 @@ function Dashboard() {
             <section className="grid grid-cols-7 ">
                 <div className="lg:col-span-1 relative">
                     <div className="bg-primaryColor h-screen fixed left-0 w-[274px] p-5 hidden lg:block">
-                        <h1 className="text-2xl font-bold text-primary-text mb-5">
-                            QUIZ <span className="text-white">PORTAL</span>
-                        </h1>
+                        <Link to="/">
+                            <h1 className="text-2xl font-bold text-primary-text mb-5">
+                                QUIZ <span className="text-white">PORTAL</span>
+                            </h1>
+                        </Link>
                         <ul className="space-y-3">{navLinks}</ul>
                     </div>
                 </div>

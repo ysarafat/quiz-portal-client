@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 function AddQuizCategory() {
+    const [loading, setLoading] = useState(false);
     const handleQuizCategory = (event) => {
         event.preventDefault();
+        setLoading(true);
         const form = event.target;
         const name = form.name.value;
         const image = form.image.files;
@@ -38,6 +40,8 @@ function AddQuizCategory() {
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
+                            setLoading(false);
+                            form.reset();
                         }
                     });
             });
@@ -58,6 +62,7 @@ function AddQuizCategory() {
                             className="h-11 w-full border border-slate-200 outline-primaryColor rounded-lg px-3 text-textDark"
                             placeholder="Enter Quiz Name"
                             name="name"
+                            required
                         />
                     </div>
                     <div className="w-full ">
@@ -66,6 +71,7 @@ function AddQuizCategory() {
                             type="file"
                             className="h-11 w-full border  border-slate-200 outline-primaryColor rounded-lg text-textDark file:bg-primaryColor file:border-none file:h-11 "
                             name="image"
+                            required
                         />
                     </div>
                     <div>
@@ -77,13 +83,15 @@ function AddQuizCategory() {
                             rows="10"
                             className=" w-full border border-slate-200 outline-primaryColor rounded-lg p-3 text-textDark"
                             placeholder="Description Here"
+                            required
                         />
                     </div>
                 </div>
                 <input
-                    className="h-11 bg-primaryColor hover:bg-hoverColor mt-4 w-full text-lg text-textDark font-title rounded-lg "
+                    className="h-11 bg-primaryColor hover:bg-hoverColor disabled:bg-slate-300 mt-4 w-full text-lg text-textDark font-title rounded-lg "
+                    disabled={loading}
                     type="submit"
-                    value="Add Quiz"
+                    value={loading ? 'Please Wait' : 'Add Quiz'}
                 />
             </form>
         </div>
